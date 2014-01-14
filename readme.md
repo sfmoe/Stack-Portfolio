@@ -1,6 +1,7 @@
 included a plugin in the theme to override the gallery 
 not trying to reinvent the wheel here
 I did comment out some of the code where it creates the gallery rows
+
 CleanerGallery
  * @version   1.0.0
  * @author    Justin Tadlock <justin@justintadlock.com>
