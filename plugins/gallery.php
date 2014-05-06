@@ -2,16 +2,16 @@
 /**
  * Cleaner Gallery - A valid image gallery script for WordPress.
  *
- * Cleaner Gallery was created to clean up the invalid HTML and remove the inline styles of the default 
- * implementation of the WordPress [gallery] shortcode.  This has the obvious benefits of creating 
- * sites with clean, valid code.  But, it also allows developers to more easily create custom styles for 
+ * Cleaner Gallery was created to clean up the invalid HTML and remove the inline styles of the default
+ * implementation of the WordPress [gallery] shortcode.  This has the obvious benefits of creating
+ * sites with clean, valid code.  But, it also allows developers to more easily create custom styles for
  * galleries within their themes.
  *
- * This program is free software; you can redistribute it and/or modify it under the terms of the GNU 
- * General Public License as published by the Free Software Foundation; either version 2 of the License, 
+ * This program is free software; you can redistribute it and/or modify it under the terms of the GNU
+ * General Public License as published by the Free Software Foundation; either version 2 of the License,
  * or (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without 
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
  * @package   CleanerGallery
@@ -26,8 +26,8 @@
 add_filter( 'post_gallery', 'cleaner_gallery', 10, 2 );
 
 /**
- * Overwrites the default WordPress [gallery] shortcode's output.  This function removes the invalid 
- * HTML and inline styles.  It adds the number of columns used as a class attribute, which allows 
+ * Overwrites the default WordPress [gallery] shortcode's output.  This function removes the invalid
+ * HTML and inline styles.  It adds the number of columns used as a class attribute, which allows
  * developers to style the gallery more easily.
  *
  * @since  0.9.0
@@ -38,6 +38,7 @@ add_filter( 'post_gallery', 'cleaner_gallery', 10, 2 );
  * @return string
  */
 function cleaner_gallery( $output, $attr ) {
+
 	global $_wp_additional_image_sizes;
 
 	static $cleaner_gallery_instance = 0;
@@ -53,7 +54,20 @@ function cleaner_gallery( $output, $attr ) {
 		if ( !$attr['orderby'] )
 			unset( $attr['orderby'] );
 	}
+	/*optional class*/
+	$class = $attr['class'];
 
+	/*optional wrapper and title*/
+	$pretag;
+	$posttag;
+	$gallery_title;
+	if(isset($attr['wrap'])){
+	$pretag = "<{$attr['wrap']} class='{$class}'>";
+	$posttag = "</{$attr['wrap']}>";
+	}
+	if(isset($attr['wrap'])){
+	$gallery_title = "<h2>{$attr['title']}</h2>\n";
+	}
 	/* Default gallery settings. */
 	$defaults = array(
 		'order'       => 'ASC',
@@ -65,7 +79,7 @@ function cleaner_gallery( $output, $attr ) {
 		'icontag'     => 'div',
 		'captiontag'  => 'figcaption',
 		'columns'     => 3,
-		'size'        => isset( $_wp_additional_image_sizes['post-thumbnail'] ) ? 'post-thumbnail' : 'thumbnail',
+		'size'        => isset($attr['size'])? $attr['size']:'medium',
 		'ids'         => '',
 		'include'     => '',
 		'exclude'     => '',
@@ -146,7 +160,7 @@ function cleaner_gallery( $output, $attr ) {
 		$output .= "\n\t\t\t\t\t\t<{$icontag} class='gallery-icon {$orientation}'>";
 
 		/* Get the image. */
-		if ( isset( $attr['link'] ) && 'file' == $attr['link'] ) 
+		if ( isset( $attr['link'] ) && 'file' == $attr['link'] )
 			$image = wp_get_attachment_link( $attachment->ID, $size, false, true );
 
 		elseif ( isset( $attr['link'] ) && 'none' == $attr['link'] )
@@ -177,14 +191,21 @@ function cleaner_gallery( $output, $attr ) {
 	}
 
 	/* Close gallery row. */
-	if ( $columns > 0 && $i % $columns !== 0 )
-		$output .= "\n\t\t\t</div>";
+	//if ( $columns > 0 && $i % $columns !== 0 )
+	//	$output .= "\n\t\t\t</div>";
 
 	/* Close the gallery <div>. */
 	$output .= "\n\t\t\t</div><!-- .gallery -->\n";
 
+wp_enqueue_script( 'freetile', get_template_directory_uri()."/assets/js/freetile.js" );
+
+
+
+
 	/* Return out very nice, valid HTML gallery. */
-	return $output;
+	return $pretag.$gallery_title.$output.$posttag;
+
+
 }
 
 ?>

@@ -1,70 +1,48 @@
 <div class="wrap">
-<?php
-if ( ! isset( $_REQUEST['settings-updated'] ) )
-		$_REQUEST['settings-updated'] = false;
+
+<?
+
+if( is_admin() ){
+
+if(isset($_POST['update_css'])){
+
+require_once ( get_template_directory() . '/plugins/scssphp/scss.inc.php' );
+$scss = new scssc();
+$file = file_get_contents(get_template_directory() .'/assets/css/stack-portfolio.scss');
+$compiled = $scss->compile($file);
+file_put_contents(get_template_directory() .'/assets/css/stack-portfolio.css', $compiled);
 ?>
-<?php screen_icon(); echo "<h2>" . get_current_theme() ." - ". __( ' Stack Options', 'Stack Portfolio' ) . "</h2>"; ?>
-<?php if ( false !== $_REQUEST['settings-updated'] ) : ?>
-		<div class="updated fade"><p><strong><?php _e( 'Options saved', 'sampletheme' ); ?></strong></p></div>
-		<?php endif; ?>
+  <div id="updated-css" class='updated'>
+        <p><?php _e( 'CSS Updated!' ); ?></p>
+  </div>
+
+<?
+}
+}
+
+?>
+
+<section>
+<h2>SCSS Processor</h2>
+If you have changed anything in the style scss file
+click here to run processor on your changes:
+<form method="post" action="">
+<input type='submit' name='update_css' value='Process SCSS' class="button button-primary"></input>
+</form>
+</section>
+<hr />
 
 <form method="post" action="options.php">
-	<?php settings_fields( 'stack_portfolio_options' ); ?>
-	<?php $options = get_option( 'stack_portfolio_theme_options' );
+    <?php settings_fields( 'stack-settings-group' ); ?>
+    <?php do_settings_sections( 'stack-settings-group' ); ?>
 
-	print_r($options);
-	 ?>
+ <h2>Site Description</h2>
+<?php
 
-<h3>Stack Portfolio Pages Options</h3>
-<hr/>
-<table>
-<tr><td>
-	<label>Pages Name
-<input id="stack_portfolio_options[stack_pages_name]" class="regular-text" type="text" name="stack_portfolio_options[stack_pages_name]" value="<?php esc_attr_e( $options['stack_pages_name'] ); ?>" />
-</label>
+fields_html();
 
-</td>
-<td>
+     submit_button(); ?>
 
-	<label>Pages Title
-<input id="stack_portfolio_options[stack_pages_title]" class="regular-text" type="text" name="stack_portfolio_options[stack_pages_title]" value="<?php esc_attr_e( $options['stack_pages_title'] ); ?>" />
-</label>
-</td>
-</tr>
-
-</table>
-
-
-
-<h3>Stack Portfolio Blog Options</h3>
-<hr/>
-<table>
-<tr><td>
-	<label>Blog Name
-<input id="stack_portfolio_options[stack_blog_name]" class="regular-text" type="text" name="stack_portfolio_options[stack_blog_name]" value="<?php esc_attr_e( $options['stack_blog_name'] ); ?>" />
-</label>
-
-</td>
-<td>
-
-	<label>Blog Title
-<input id="stack_portfolio_options[stack_blog_title]" class="regular-text" type="text" name="stack_portfolio_options[stack_blog_title]" value="<?php esc_attr_e( $options['stack_blog_title'] ); ?>" />
-</label>
-</td>
-</tr>
-
-</table>
-
-
-<p class="submit">
-	<input type="submit" class="button-primary" value="<?php _e( 'Save Options', 'Stack Portfolio' ); ?>" />
-</p>
 </form>
+
 </div>
-
-
-<style type="text/css">
-table{
-	width: 100%;
-}
-</style>

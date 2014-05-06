@@ -64,17 +64,17 @@
 
 				<label for="author">Name <?php if ($req) echo "(required)"; ?></label>
 				<input type="text" name="author" id="author" value="<?php echo $comment_author; ?>" size="55" tabindex="1" <?php if ($req) echo "aria-required='true'"; ?>>
-				
+
 				<label for="email">Email (will not be published) <?php if ($req) echo "(required)"; ?></label>
 				<input type="text" name="email" id="email" value="<?php echo $comment_author_email; ?>" size="55" tabindex="2" <?php if ($req) echo "aria-required='true'"; ?>>
-				
+
 				<label for="url">Website</label>
 				<input type="text" name="url" id="url" value="<?php echo $comment_author_url; ?>" size="55" tabindex="3">
 
 				<?php endif; ?>
 
 				<!-- p>Allowed <abbr title="HyperText Markup Language">HTML:</abbr> tags: <code><?php echo allowed_tags(); ?></code></p -->
-				<label for="comment">Comment</label><br/>
+				<label for="comment">Comment</label>
 				<textarea name="comment" id="comment" cols="55" rows="10" tabindex="4"></textarea><br/>
 				<input name="submit" type="submit" id="submit" tabindex="5" value="Submit Comment">
 				<input type="hidden" name="comment_post_ID" value="<?php echo $id; ?>">

@@ -3,51 +3,63 @@
  * by Moe Martinez
  * http://github.com/sfmoe
  */
-document.createElement('header');
-document.createElement('footer');
-document.createElement('section');
-document.createElement('article');
-document.createElement('aside');
-document.createElement('nav');
-
-//wrapper for jquery $ to make it safe to run and easier to write/read ...i hate having to write jQuery over and over :P
-;(function($) {
-
+/*!
+ * Stack Portfolio JS
+ * by Moe Martinez
+ * http://github.com/sfmoe
+ */
 $(document).ready(function(){
+var subclicked = 0; //keep track of clicked for toggling sub-menu
+var menuheight = $('#mast').height();
 
 
-
-$('.nav-button').click(function(){  
-	$('.nav').toggle();  
-    $('.nav-list').toggle();  
-	 $('.nav').toggleClass("nav-inblock");  
-    $('.nav-list').toggleClass("nav-inblock");  
-});
-
-if($('.menu-item').children(".sub-menu").length > 0){
-
-		$('.menu-item-has-children a').first().on('click', function(e){
-			// Toggle the nested nav
-				e.preventDefault();
-		
-				$(this).parent(".menu-item").children('.sub-menu').toggle();
-				$('a:not([title="disabled-click"])').on('click',function(){
-
-					var url = $(this).attr('href');
-
-					 window.location = url; // redirect
-
-				});
-		
-			
+$('.nav-select').on('click', function(e){
+if($("#mast").height() != menuheight){
+		$('#mast').height(function (index, height) {
+		subclicked = 0;
+		return (menuheight);
 		});
-		}
+}else{
+		$('#mast').height(function (index, height) {
+		return (menuheight+60);
+		});
+}
+});
 
 
 
+
+$('.menu-item a').on('click', function(e){
+//if it has a sub-menu then prevent it from following the link and show sub-menu
+if($(this).next('ul.sub-menu').length != 0){
+e.preventDefault();
+if (subclicked == 1){
+$('#mast').height(function (index, height) {
+return (height - 40);
+});
+subclicked =0;
+}else{
+$('#mast').height(function (index, height) {
+return (height + 40);
+});
+subclicked =1;
+}
+}
+});
+
+$( window ).resize(function() {
+		$('#mast').height(function (index, height) {
+		subclicked = 0;
+		return (menuheight);
+		});
+});
+
+$('.gallery').freetile(
+	{
+	  animate: true,
+    elementDelay: 10
+	});
 
 
 
 });
-
-})(jQuery);

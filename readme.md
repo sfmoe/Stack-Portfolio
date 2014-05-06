@@ -1,10 +1,9 @@
-included a plugin in the theme to override the gallery 
+included a plugin in the theme to override the gallery "Cleaner Gallery"
 not trying to reinvent the wheel here
-I did comment out some of the code where it creates the gallery rows
+I did edit  some of the code to suit my needs
 
-CleanerGallery
- * @version   1.0.0
- * @author    Justin Tadlock <justin@justintadlock.com>
- * @copyright Copyright (c) 2008 - 2013, Justin Tadlock
- * @link      http://justintadlock.com/archives/2008/04/13/cleaner-wordpress-gallery-plugin
- * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+--Shortcodes Included
+
+-Hero Diagonal Split (use media ids) [hero ids="111,222"]
+-gallery with extras [gallery wrap='section' class='portfolio maxed' title='Selected Works' size="thumbnail" ids="1205,1206,1207,1137,1104,914,913,911,902,872"]
+		--options for gallery are the usuals plus: wrap: "wraps the gallery in this element", class="adds a class to the wrap element", title: "creates and h2 title"

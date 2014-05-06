@@ -2,16 +2,17 @@
 
 	<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
-		<section>
+		<section class='media-attachment'>
 			<article id="post-<?php the_ID(); ?>">
 				<header>
 					<h1><a href="<?php echo get_permalink($post->post_parent); ?>" rev="attachment"><?php echo get_the_title($post->post_parent); ?></a> &raquo; <?php the_title(); ?></h1>
 				</header>
-				<section>
+				<section class='post-content'>
 	<p><a href="<?php echo wp_get_attachment_url($post->ID); ?>"><?php echo wp_get_attachment_image( $post->ID, 'original' ); ?></a></p>
-
+					<section class='excerpt'>
 					<?php if (!empty($post->post_excerpt)) the_excerpt(); // the caption ?>
 					<?php the_content('Read more on "'.the_title('', '', false).'" &raquo;'); ?>
+					</section>
 
 							<nav class="postnav image-nav">
 
@@ -20,14 +21,14 @@
 			</nav>
 
 
-		
+
 				</section>
 				<footer>
 					<?php wp_link_pages(array('before' => '<p><strong>Pages:</strong> ', 'after' => '</p>', 'next_or_number' => 'number')); ?>
 					<?php the_tags( '<p>Tags: ', ', ', '</p>'); ?>
 
 					<p>
-						This entry was posted on <?php the_time('l, F jS, Y'); ?> at <?php the_time(); ?> and is filed under <?php the_category(', ') ?>. 
+						This entry was posted on <?php the_time('l, F jS, Y'); ?> at <?php the_time(); ?> and is filed under <?php the_category(', ') ?>.
 						You can follow any responses to this entry through the <?php post_comments_feed_link('RSS 2.0'); ?> feed.
 
 						<?php if (('open' == $post-> comment_status) && ('open' == $post->ping_status)) {

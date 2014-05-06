@@ -45,8 +45,10 @@
 
 			<?php endwhile; ?>
 
-			<nav>
-				<p><?php posts_nav_link('&nbsp;&bull;&nbsp;'); ?></p>
+			<nav class="postnav">
+
+<div class="alignleft"><?php previous_posts_link('&laquo; Previous Entries') ?></div>
+<div class="alignright"><?php next_posts_link('Next Entries &raquo;','') ?></div>
 			</nav>
 
 			<?php else : ?>
