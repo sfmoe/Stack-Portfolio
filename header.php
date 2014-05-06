@@ -2,8 +2,9 @@
 <html <?php language_attributes(); ?>>
 <head>
 	<meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php bloginfo('charset'); ?>">
-	<title><?php bloginfo('name'); ?> | <?php bloginfo('description'); ?></title>
-	<meta name="description" content="<?php  echo get_option( 'site_description', 'Stack Porfolio for Wordpress'); ?>">
+	<title><?php  echo (is_single() ? single_post_title('', true)." | " : '' );
+	bloginfo('name'); ?> | <?php bloginfo('description'); ?></title>
+	<meta name="description" content="<?php  echo (is_single() ? single_post_title('', true) : get_option( 'site_description', 'Stack Porfolio for Wordpress') ); ?>">
 	<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
 	<meta charset="utf-8" />
 	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
