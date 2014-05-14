@@ -26,7 +26,17 @@ if($("#mast").height() != menuheight){
 }
 });
 
+//keep image from getting blown up to big
+$('img').each(function(index){
 
+if($(this).width() > $(this).attr('width')){
+var this_w = $(this).attr('width');	
+var this_h = $(this).attr('height');	
+
+$(this).css({'max-width': this_w+'px', 'max-height': this_h+'px'});
+}
+
+});
 
 
 $('.menu-item a').on('click', function(e){
@@ -54,12 +64,13 @@ $( window ).resize(function() {
 		});
 });
 
+if($('.gallery')){
 $('.gallery').freetile(
 	{
 	  animate: true,
     elementDelay: 10
 	});
-
+}
 
 
 });
