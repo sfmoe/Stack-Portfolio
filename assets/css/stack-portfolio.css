@@ -363,7 +363,8 @@ div#comments {
     width: 100% !important; }
   .blog article[id^="post-"] img, .archive article[id^="post-"] img, .single article[id^="post-"] img, .contact article[id^="post-"] img {
     width: 100%;
-    height: auto; }
+    height: auto;
+    margin: 0 auto; }
   .blog article[id^="post-"] header, .archive article[id^="post-"] header, .single article[id^="post-"] header, .contact article[id^="post-"] header {
     position: relative; }
     .blog article[id^="post-"] header p, .archive article[id^="post-"] header p, .single article[id^="post-"] header p, .contact article[id^="post-"] header p {

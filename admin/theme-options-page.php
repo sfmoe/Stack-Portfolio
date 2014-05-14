@@ -1,6 +1,6 @@
 <div class="wrap">
 
-<?
+<?php
 
 if( is_admin() ){
 
@@ -16,7 +16,8 @@ file_put_contents(get_template_directory() .'/assets/css/stack-portfolio.css', $
         <p><?php _e( 'CSS Updated!' ); ?></p>
   </div>
 
-<?
+<?php
+
 }
 }
 

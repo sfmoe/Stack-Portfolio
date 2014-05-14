@@ -492,24 +492,34 @@ div#comments{
 
 
 
-.blog, .archive, .single, .contact{
+.blog, .archive, .single, .contact, .attachment{
 	section{
 		overflow: auto;
 
 	}
-	article[id^="post-"]{
+
+article[id^="post"]{
 			border-top: 1px solid lightgrey;
 			overflow: auto;
 			width: 100%;
 			max-width: $max-size;
 			margin: 0 auto;
-			.alignnone{
+		.alignnone{
 				width: 100% !important;
 			}
+		
+		section { 
+			a{
+				display: inline-block;
+				margin: 0 auto;
+			}
+
 			img{
 				width: 100%;
 				height: auto;
+				margin: 0 auto; 
 			}
+		}
 			header{
 				position: relative;
 				p{
